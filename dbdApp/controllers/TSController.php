@@ -1,8 +1,7 @@
 <?php
 class TSController extends dbdController {
 
-	const NOTIFYR_KEY = 'JTnrOhQhR4d38Kue7YvezCbETms7r4xS7iX2njULmE0';
-	const NOTIFYR_SMS_PERMIT = 'HJkF7XJ4EDTITciD6W1idiTdyS9SPDalm5zPKOcaDTE';
+	const NOTIFYR_CREDENTIALS = 'constant/notifyr.inc';
 
 	/**
 	 * @var null|NotifyrClient
@@ -14,8 +13,23 @@ class TSController extends dbdController {
 	 */
 	protected function getNotifyrClient() {
 		if ($this->notifyr_client === null) {
-			$this->notifyr_client = new NotifyrClient(self::NOTIFYR_KEY, self::NOTIFYR_SMS_PERMIT);
+			// if we don't have the creds, try to load them
+			if (!(NOTIFYR_KEY && NOTIFYR_SMS_PERMIT)) {
+i				dbdLoader::load(self::NOTIFYR_CREDENTIALS);
+				// if we still don't have 'em, throw
+                		if (!(NOTIFYR_KEY && NOTIFYR_SMS_PERMIT)) {
+                        		throw new dbdException("Notifyr credentials file could not be included. PATH=".self::NOTIFYR_CREDENTIALS);
+                		}
+			}
+			$this->notifyr_client = new NotifyrClient(NOTIFYR_KEY, NOTIFYR_SMS_PERMIT);
 		}
 		return $this->notifyr_client;
+	}
+
+	protected function init() {
+		dbdLoader::load(self::NOTIFYR_CREDENTIALS);
+		if (!(NOTIFYR_KEY && NOTIFYR_SMS_PERMIT)) {
+                        throw new dbdException("Notifyr credentials file could not be included. PATH=".self::NOTIFYR_CREDENTIALS);
+		}
 	}
 }
