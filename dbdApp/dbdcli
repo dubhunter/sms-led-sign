@@ -1,0 +1,4 @@
+#!/usr/bin/php -q
+<?php
+require_once("/var/www/vhosts/sign/willmason.me/httpdocs/index.php");
+?>
