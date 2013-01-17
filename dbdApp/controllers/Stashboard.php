@@ -12,8 +12,12 @@ class Stashboard extends TSController {
 		if ($this->getParam('challenge')) {
 			echo $this->getParam('challenge');
 		} else {
-			dbdLog($this->getParam('closed') ? 'Off' : 'On');
-			$this->getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, $this->getParam('closed') ? 'Off' : 'On');
+			$alarm = 'Off';
+			if ($this->getParam('opened') && !$this->getParam('closed')) {
+				$alarm = 'On';
+			}
+			dbdLog($alarm);
+			$this->getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, $alarm);
 		}
 	}
 }
