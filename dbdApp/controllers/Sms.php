@@ -1,13 +1,13 @@
 <?php
-class Index extends TSController {
+class Sms extends TSController {
 
 	const NOTIFYR_CHANNEL = 'sms';
 
 	protected function init() {
-		$this->noRender();
+		$this->setTemplate('twiml-empty.tpl');
 	}
 
-	public function doSms() {
+	public function doDefault() {
 		dbdLog($this->getParams());
 		$this->getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, $this->getParam('Body'));
 	}
