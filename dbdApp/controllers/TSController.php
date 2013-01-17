@@ -14,10 +14,10 @@ class TSController extends dbdController {
 	protected function getNotifyrClient() {
 		if ($this->notifyr_client === null) {
 			// if we don't have the creds, try to load them
-			if (!(NOTIFYR_KEY && NOTIFYR_SMS_PERMIT)) {
+			if (!(defined('NOTIFYR_KEY') && defined('NOTIFYR_SMS_PERMIT'))) {
 				dbdLoader::load(self::NOTIFYR_CREDENTIALS);
 				// if we still don't have 'em, throw
-				if (!(NOTIFYR_KEY && NOTIFYR_SMS_PERMIT)) {
+				if (!(defined('NOTIFYR_KEY') && defined('NOTIFYR_SMS_PERMIT'))) {
 					throw new dbdException("Notifyr credentials file could not be included. PATH=" . self::NOTIFYR_CREDENTIALS);
 				}
 			}
