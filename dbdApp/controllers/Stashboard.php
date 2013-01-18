@@ -9,11 +9,14 @@ class Stashboard extends TSController {
 
 	public function doDefault() {
 		dbdLog($this->getParams());
-		if ($this->getParam('challenge')) {
+		if ($this->getParam('hub.challenge') && $this->getParam('hub.mode') == 'subscribe') {
 			echo $this->getParam('challenge');
 		} else {
+			$payload = $this->getParam('payload');
+			$payload = json_decode($payload);
+			dbdLog($payload);
 			$alarm = 'off';
-			if ($this->getParam('opened') && !$this->getParam('closed')) {
+			if ($payload['opened'] && !$payload['closed']) {
 				$alarm = 'on';
 			}
 			dbdLog($alarm);
