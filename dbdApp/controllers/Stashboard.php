@@ -14,7 +14,7 @@ class Stashboard extends TSController {
 			echo $this->getParam('hub_challenge');
 		} else {
 			$payload = $this->getParam('payload');
-			$payload = json_decode($payload);
+			$payload = json_decode($payload, true);
 			dbdLog($payload);
 			$alarm = 'off';
 			if ($payload['opened'] && !$payload['closed']) {
