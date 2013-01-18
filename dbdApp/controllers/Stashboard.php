@@ -10,6 +10,7 @@ class Stashboard extends TSController {
 	public function doDefault() {
 		dbdLog($this->getParams());
 		if ($this->getParam('hub_challenge') && $this->getParam('hub_mode') == 'subscribe') {
+			dbdLog('challenge accepted');
 			echo $this->getParam('hub_challenge');
 		} else {
 			$payload = $this->getParam('payload');
