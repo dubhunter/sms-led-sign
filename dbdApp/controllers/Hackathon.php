@@ -10,7 +10,7 @@ class Hackathon extends TSController {
 		$from = $this->getParam('From');
 		$vote = $this->getParam('Body');
 
-		if (is_numeric($vote) && Vote::getCount(array('from' => $from)) < 5) {
+		if (is_numeric($vote) && Vote::getCount(array('from' => $from)) < 5 && Vote::getCount(array('from' => $from, 'vote' => $vote)) == 0) {
 			$V = new Vote();
 			$V->setFrom($from);
 			$V->setVote($vote);
