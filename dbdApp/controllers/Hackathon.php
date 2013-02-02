@@ -1,5 +1,5 @@
 <?php
-class Stashboard extends TSController {
+class Hackathon extends TSController {
 
 	protected function init() {
 		$this->noRender();
