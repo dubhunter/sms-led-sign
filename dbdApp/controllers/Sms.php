@@ -1,8 +1,6 @@
 <?php
 class Sms extends TSController {
 
-	const NOTIFYR_CHANNEL = 'sms';
-
 	protected function init() {
 		$this->setTemplate('twiml-empty.tpl');
 	}
