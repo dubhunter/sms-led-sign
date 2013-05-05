@@ -36,7 +36,7 @@ class LastAction {
 	public static function logSms() {
 		self::$db = dbdDB::getInstance();
 		$sql = "update `" . self::TABLE_NAME . "` set last_sms = ?";
-		self::$db->prepExec($sql, array(dbdDB::time()))->execute();
+		self::$db->prepExec($sql, array(dbdDB::date()))->execute();
 	}
 
 	public static function logTweet($id) {
