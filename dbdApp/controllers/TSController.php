@@ -8,19 +8,19 @@ class TSController extends dbdController {
 	/**
 	 * @var null|Twitter
 	 */
-	private $twitter_client = null;
+	private static $twitter_client = null;
 
 	/**
 	 * @var null|NotifyrClient
 	 */
-	private $notifyr_client = null;
+	private static $notifyr_client = null;
 
 	/**
 	 * @throws TSException
 	 * @return tmhOAuth
 	 */
-	protected function getTwitterClient() {
-		if ($this->twitter_client === null) {
+	protected static function getTwitterClient() {
+		if (self::$twitter_client === null) {
 			// if we don't have the creds, try to load them
 			if (!(defined('TWITTER_CONSUMER_KEY') && defined('TWITTER_CONSUMER_SECRET') && defined('TWITTER_ACCESS_TOKEN') && defined('TWITTER_ACCESS_TOKEN_SECRET'))) {
 				dbdLoader::load(self::TWITTER_CREDENTIALS);
@@ -29,22 +29,22 @@ class TSController extends dbdController {
 					throw new TSException("Twilio credentials file could not be included. PATH=" . self::TWITTER_CREDENTIALS);
 				}
 			}
-			$this->twitter_client = new tmhOAuth(array(
+			self::$twitter_client = new tmhOAuth(array(
 				'consumer_key'    => TWITTER_CONSUMER_KEY,
 				'consumer_secret' => TWITTER_CONSUMER_SECRET,
 				'user_token'      => TWITTER_ACCESS_TOKEN,
 				'user_secret'     => TWITTER_ACCESS_TOKEN_SECRET,
 			));
 		}
-		return $this->twitter_client;
+		return self::$twitter_client;
 	}
 
 	/**
 	 * @throws TSException
 	 * @return NotifyrClient
 	 */
-	protected function getNotifyrClient() {
-		if ($this->notifyr_client === null) {
+	protected static function getNotifyrClient() {
+		if (self::$notifyr_client === null) {
 			// if we don't have the creds, try to load them
 			if (!(defined('NOTIFYR_KEY') && defined('NOTIFYR_SMS_PERMIT'))) {
 				dbdLoader::load(self::NOTIFYR_CREDENTIALS);
@@ -53,8 +53,8 @@ class TSController extends dbdController {
 					throw new TSException("Notifyr credentials file could not be included. PATH=" . self::NOTIFYR_CREDENTIALS);
 				}
 			}
-			$this->notifyr_client = new NotifyrClient(NOTIFYR_KEY, NOTIFYR_SMS_PERMIT);
+			self::$notifyr_client = new NotifyrClient(NOTIFYR_KEY, NOTIFYR_SMS_PERMIT);
 		}
-		return $this->notifyr_client;
+		return self::$notifyr_client;
 	}
 }

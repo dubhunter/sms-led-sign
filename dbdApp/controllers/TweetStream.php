@@ -44,14 +44,12 @@ class TweetStream extends TSController {
 			'follow' => '1780784149',
 		);
 
-		$this->getTwitterClient()->streaming_request('POST', $method, $params, array($this, 'handleTweets'));
-	}
-
-	public function handleTweets($data, $length, $metrics) {
-		dbdLog($data);
-		dbdLog($length);
-		dbdLog($metrics);
-		$this->getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, $data);
-
+		self::getTwitterClient()->streaming_request('POST', $method, $params, function ($data, $length, $metrics) {
+			$data = json_decode($data, true);
+			dbdLog($data);
+			dbdLog($length);
+			dbdLog($metrics);
+			self::getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, $data['text']);
+		});
 	}
 }

@@ -21,7 +21,7 @@ class Stashboard extends TSController {
 				$alarm = 'on';
 			}
 			dbdLog($alarm);
-			$this->getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, $alarm);
+			self::getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, $alarm);
 		}
 	}
 }

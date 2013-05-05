@@ -7,6 +7,6 @@ class Sms extends TSController {
 
 	public function doDefault() {
 		dbdLog($this->getParams());
-		$this->getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, $this->getParam('Body'));
+		self::getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, $this->getParam('Body'));
 	}
 }
