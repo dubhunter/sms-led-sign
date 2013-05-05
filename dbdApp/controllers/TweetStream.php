@@ -37,7 +37,7 @@ class TweetStream extends TSController {
 //		fclose($filePointer);
 
 		//Now, do something forever.
-		$method = 'https://stream.twitter.com/1.1/statuses/filter.json';
+		$method = 'https://stream.twitter.com/1/statuses/filter.json';
 
 		$params = array(
 			'track' => 'twilio,hyduino',
