@@ -37,11 +37,12 @@ class TweetStream extends TSController {
 //		fclose($filePointer);
 
 		//Now, do something forever.
-		$method = 'https://stream.twitter.com/1/statuses/filter.json';
+		$method = 'https://stream.twitter.com/1.1/statuses/filter.json';
 
 		$params = array(
 			'track' => 'twilio,hyduino',
-			'follow' => '1780784149',
+//			'follow' => '138862289',
+			'follow' => '1118284267',
 		);
 
 		self::getTwitterClient()->streaming_request('POST', $method, $params, function ($data, $length, $metrics) {
