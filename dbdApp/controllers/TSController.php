@@ -59,6 +59,6 @@ class TSController extends dbdController {
 	 * @return mixed
 	 */
 	protected function sanitize($str) {
-		return preg_replace('/[^ -~]/i', '', $str);
+		return preg_replace('/[^ -~]/', '', $str);
 	}
 }
