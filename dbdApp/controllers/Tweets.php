@@ -18,9 +18,8 @@ class Tweets extends TSController {
 
 			if (count($response['statuses']) > 0) {
 				$tweet = $response['statuses'][0];
-				dbdLog('@' . $tweet['user']['screen_name'] . ': ' . $tweet['text']);
-//				LastAction::logTweet($tweet['id']);
-//				self::getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, '@' . $tweet['user']['screen_name'] . ': ' . $tweet['text']);
+				LastAction::logTweet($tweet['id']);
+				self::getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, '@' . $tweet['user']['screen_name'] . ': ' . $tweet['text']);
 			}
 		}
 	}
