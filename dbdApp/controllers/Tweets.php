@@ -16,14 +16,12 @@ class Tweets extends TSController {
 				'since_id' => LastAction::getLastTweet(),
 			));
 
-			dbdLog($response);
-
-//			$data = json_decode($response->text, true);
-
-//			if (count($data['results']) > 0) {
-//				LastAction::logTweet($data['results'][0]['id']);
-//				self::getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, '@' . $data['results'][0]['from_user'] . ': ' .$data['results'][0]['text']);
-//			}
+			if (count($response['statuses']) > 0) {
+				$tweet = $response['statuses'][0];
+				dbdLog('@' . $tweet['user']['screen_name'] . ': ' . $tweet['text']);
+//				LastAction::logTweet($tweet['id']);
+//				self::getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, '@' . $tweet['user']['screen_name'] . ': ' . $tweet['text']);
+			}
 		}
 	}
 }
