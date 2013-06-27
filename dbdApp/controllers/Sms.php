@@ -8,7 +8,7 @@ class Sms extends TSController {
 	public function doDefault() {
 		dbdLog($this->getParams());
 		LastAction::logSms();
-		self::publishNotifyr($this->getParam('Body'));
-//		self::publishFile($this->getParam('Body'));
+//		self::publishNotifyr($this->getParam('Body'));
+		self::publishFile($this->getParam('Body'));
 	}
 }
