@@ -20,8 +20,8 @@ class Tweets extends TSController {
 				$tweet = $response['statuses'][0];
 				LastAction::logTweet($tweet['id']);
 				$message = '@' . $tweet['user']['screen_name'] . ': ' . $tweet['text'];
-//				self::publishNotifyr($message);
-				self::publishFile($message);
+				self::publishNotifyr($message);
+//				self::publishFile($message);
 			}
 		}
 	}
