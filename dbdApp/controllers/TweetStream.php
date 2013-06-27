@@ -50,7 +50,7 @@ class TweetStream extends TSController {
 			dbdLog($data);
 			dbdLog($length);
 			dbdLog($metrics);
-			self::getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, $data['text']);
+			self::publishNotifyr($data['text']);
 		});
 	}
 }

@@ -4,6 +4,7 @@ class TSController extends dbdController {
 	const TWITTER_CREDENTIALS = 'constant/twitter.inc';
 	const NOTIFYR_CREDENTIALS = 'constant/notifyr.inc';
 	const NOTIFYR_CHANNEL = 'sms';
+	const MESSAGE_FILE = 'message.txt';
 
 	/**
 	 * @var null|Twitter
@@ -58,7 +59,24 @@ class TSController extends dbdController {
 	 * @param $str
 	 * @return mixed
 	 */
-	protected function sanitize($str) {
+	protected static function sanitize($str) {
 		return preg_replace('/[^ -~]/', '', $str);
+	}
+
+	/**
+	 * Sanitize and publish a message to Notifyr
+	 * @param $message
+	 */
+	protected static function publishNotifyr($message) {
+		self::getNotifyrClient()->publish(self::NOTIFYR_CHANNEL, self::sanitize($message));
+	}
+
+	/**
+	 * Sanitize and publish a message to a file
+	 * @param $message
+	 */
+	protected static function publishFile($message) {
+		$file = DBD_DOC_ROOT . '/' . self::MESSAGE_FILE;
+		file_put_contents($file, self::sanitize($message));
 	}
 }
