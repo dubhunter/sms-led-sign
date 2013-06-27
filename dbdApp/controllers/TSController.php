@@ -77,6 +77,6 @@ class TSController extends dbdController {
 	 */
 	protected static function publishFile($message) {
 		$file = DBD_DOC_ROOT . '/' . self::MESSAGE_FILE;
-		file_put_contents($file, self::sanitize($message));
+		file_put_contents($file, 'data: "' . self::sanitize($message) . '"' . PHP_EOL . PHP_EOL);
 	}
 }
