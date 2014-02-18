@@ -1,6 +1,7 @@
 <?php
 class TSController extends dbdController {
 
+	const TWILIO_CREDENTIALS = 'constant/twilio.inc';
 	const TWITTER_CREDENTIALS = 'constant/twitter.inc';
 	const NOTIFYR_CREDENTIALS = 'constant/notifyr.inc';
 	const NOTIFYR_CHANNEL = 'sms';
@@ -12,9 +13,33 @@ class TSController extends dbdController {
 	private static $twitter_client = null;
 
 	/**
+	 * @var null|TwilioRestClient
+	 */
+	private static $twilio_client = null;
+
+	/**
 	 * @var null|NotifyrClient
 	 */
 	private static $notifyr_client = null;
+
+	/**
+	 * @throws TSException
+	 * @return TwilioRestClient
+	 */
+	protected static function getTwilioClient() {
+		if (self::$twilio_client === null) {
+			// if we don't have the creds, try to load them
+			if (!(defined('TWILIO_ACCOUNT_SID') && defined('TWILIO_AUTH_TOKEN'))) {
+				dbdLoader::load(self::TWILIO_CREDENTIALS);
+				// if we still don't have 'em, throw
+				if (!(defined('TWILIO_ACCOUNT_SID') && defined('TWILIO_AUTH_TOKEN'))) {
+					throw new TSException("Twilio credentials file could not be included. PATH=" . self::TWILIO_CREDENTIALS);
+				}
+			}
+			self::$twilio_client = new TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+		}
+		return self::$twilio_client;
+	}
 
 	/**
 	 * @throws TSException

@@ -3,10 +3,6 @@ class Tweets extends TSController {
 
 	const SMS_TIMEOUT = 60;
 
-	protected function init() {
-		$this->noRender();
-	}
-
 	public function doDefault() {
 		if (time() - strtotime(LastAction::getLastSms()) > self::SMS_TIMEOUT) {
 			$response = self::getTwitterClient()->get('search/tweets', array(
