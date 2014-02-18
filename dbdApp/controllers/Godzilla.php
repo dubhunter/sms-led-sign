@@ -14,7 +14,7 @@ class Godzilla extends TSController {
 				'Body' => 'GODZILLA!!!',
 			);
 			$response = $twilio->request('/' . TWILIO_VERSION . '/Accounts/' . TWILIO_ACCOUNT_SID . '/Messages', 'POST', $sms);
-			echo json_encode($response->ResponseXml, JSON_PRETTY_PRINT);
+			echo json_encode($response->ResponseXml, JSON_PRETTY_PRINT) . PHP_EOL;
 		}
 	}
 }
