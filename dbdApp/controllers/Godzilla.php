@@ -9,12 +9,12 @@ class Godzilla extends TSController {
 		);
 		foreach ($numbers as $number) {
 			$sms = array(
-				'From' => TWILIO_NUMBER_WILL,
+				'From' => TWILIO_NUMBER_SIGN,
 				'To' => $number,
 				'Body' => 'GODZILLA!!!',
 			);
-			$response = $twilio->request('/' . TWILIO_VERSION . '/Accounts/' . TWILIO_ACCOUNT_SID . '/SMS/Messages.json', 'POST', $sms);
-			echo json_encode(json_decode($response->ResponseText), JSON_PRETTY_PRINT);
+			$response = $twilio->request('/' . TWILIO_VERSION . '/Accounts/' . TWILIO_ACCOUNT_SID . '/SMS/Messages', 'POST', $sms);
+			echo json_encode($response->ResponseXml, JSON_PRETTY_PRINT);
 		}
 	}
 }
