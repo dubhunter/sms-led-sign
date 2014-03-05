@@ -9,7 +9,7 @@ class Godzilla extends TSController {
 		);
 		foreach ($numbers as $number) {
 			$sms = array(
-				'From' => TWILIO_NUMBER_SIGN,
+				'From' => TWILIO_NUMBER_GODZILLA,
 				'To' => $number,
 				'Body' => 'GODZILLA!!!',
 			);
