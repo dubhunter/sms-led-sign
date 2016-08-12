@@ -6,7 +6,7 @@ class Tweets extends TSController {
 	public function doDefault() {
 		if (time() - strtotime(LastAction::getLastSms()) > self::SMS_TIMEOUT) {
 			$response = self::getTwitterClient()->get('search/tweets', array(
-				'q' => 'twilio',
+				'q' => 'twilio -twlo -cramer',
 				'count' => '1',
 				'lang' => 'en',
 				'since_id' => LastAction::getLastTweet(),
