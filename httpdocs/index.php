@@ -13,8 +13,8 @@ define("DBD_MVC_DIR", "/var/www/dbdMVC2/");
 define("VENDOR_DIR", realpath(DBD_DOC_ROOT."/../vendor")."/");
 //define("PEAR_DIR", "/usr/share/pear");
 
-require_once(VENDOR_DIR."autoload.php");
 require_once(DBD_MVC_DIR."dbdMVC.php");
+require_once(VENDOR_DIR."autoload.php");
 //dbdLoader::addPath(PEAR_DIR);
 
 /**
