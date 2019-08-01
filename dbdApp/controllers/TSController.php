@@ -1,4 +1,7 @@
 <?php
+
+use Abraham\TwitterOAuth\TwitterOAuth;
+
 class TSController extends dbdController {
 
 	const TWILIO_CREDENTIALS = 'constant/twilio.inc';
@@ -55,7 +58,7 @@ class TSController extends dbdController {
 					throw new TSException("Twilio credentials file could not be included. PATH=" . self::TWITTER_CREDENTIALS);
 				}
 			}
-			self::$twitter_client = new Twitter(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET);
+			self::$twitter_client = new TwitterOAuth(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET);
 		}
 		return self::$twitter_client;
 	}

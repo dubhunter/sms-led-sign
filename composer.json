@@ -1,0 +1,12 @@
+{
+    "name": "dubhunter/sms-led-sign",
+    "require": {
+        "abraham/twitteroauth": "0.6.6"
+    },
+    "authors": [
+        {
+            "name": "dubhunter",
+            "email": "get@willmason.me"
+        }
+    ]
+}
